@@ -6,12 +6,15 @@
 * **Authors:** **Shuxuan Li**, Zhilin Zhao, Quyu Kong, Wei-Shi Zheng
 * **Venue:** *IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), 2026*
 
+> **FRAP Pipeline Overview**
+
+<p align="center">
+  <img src="./assets/pipeline.jpg" alt="FRAP Framework" width="85%">
+</p>
+
 ## 🌟 Overview
 
-Performance estimation under distribution shift aims to predict how a model behaves on an unlabeled test set whose distribution differs from the training data. 
-
-### 🚨 The Challenge
-Existing approaches rely solely on the outputs of the given model. However, the model's inherent biases are **amplified once the distribution shifts**, significantly weakening the correlation between the estimated and the true performance.
+Performance estimation under distribution shift aims to predict how a model behaves on an unlabeled test set whose distribution differs from the training data. Existing approaches rely solely on the outputs of the given model whose biases are amplified once the distribution shifts, weakening the correlation with the true performance.
 
 ### 💡 Our Solution: FRAP
 To break this limitation, we propose **Fused Reference Alignment Prediction (FRAP)**. 
@@ -20,14 +23,17 @@ FRAP constructs a much more reliable surrogate of the ground-truth labels by lev
 * **Domain-Specific Expertise:** Capitalizing on the intrinsic knowledge of the base model.
 * **Strong Cross-Domain Generalization:** Integrating the robust zero-shot capabilities of an external foundation model.
 
+### 🛠️ Methodology
+
+1. **Test-Time Calibration:** FRAP aligns the prediction distribution of the foundation model (e.g., CLIP, SigLIP) with that of the base model by applying a temperature-scaled calibration that minimizes their Jensen-Shannon (JS) divergence, establishing a consistent probabilistic space.  
+
+2. **Confidence-Weighted Fusion:** The aligned predictions are fused through confidence-based weighting into a refined reference distribution.  
+
+3. **Performance Estimation:** Performance estimation is obtained by measuring how closely the base model predictions agree with this reference distribution.
+
 ---
 
 ### 📌 Framework
-> **FRAP Pipeline Overview**
-
-<p align="center">
-  <img src=".assets/pipeline.jpg" alt="FRAP Framework" width="85%">
-</p>
 
 ## Project Structure
 
@@ -135,7 +141,7 @@ python model_train.py \
 python estimate.py \
     --dataset CIFAR10 \
     --model ResNet18 \
-    --metric IM \
+    --metric FRAP \
     --data_path /path/to/data \
     --ckpt_epoch 20 \
     --pretrained
@@ -156,15 +162,15 @@ python estimate.py \
 ```bash
 python Result_Analysis.py \
     --dataset CIFAR10 \
-    --metric IM \
+    --metric FRAP \
     --pretrained
 ```
 
 ## Supported Datasets
 
-- **Vision**: CIFAR-10, CIFAR-100, MNIST, ImageNet, TinyImageNet, DomainNet
+- **Vision**: CIFAR-10, CIFAR-100, MNIST, ImageNet, TinyImageNet
 - **BREEDS**: living17, nonliving26, entity13, entity30
-- **Wilds**: Camelyon17, Fmow, Rxrx1, Amazon, CivilComments
+- **Wilds**: Fmow
 
 ## Notes
 
@@ -174,9 +180,14 @@ python Result_Analysis.py \
 - Results are saved in checkpoints and analysis directories
 
 ## Citation
+If you find this project useful for your research, please consider citing our paper:
+```bibtex
+@InProceedings{Li_2026_CVPR,
+    author    = {Li, Shuxuan and Zhao, Zhilin and Kong, Quyu and Zheng, Wei-Shi},
+    title     = {Bridging Domain Expertise and Generalization for Performance Estimation},
+    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+    month     = {June},
+    year      = {2026},
+    pages     = {7967-7977}
+}
 
-[Add your citation information here]
-
-## Contact
-
-[Add contact information here]
