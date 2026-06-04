@@ -1,11 +1,38 @@
-# RAAP: Reference-Aligned Accuracy Prediction
+# FRAP: Bridging Domain Expertise and Generalization for Performance Estimation (CVPR 2026)
 
-Reference-Aligned Accuracy Prediction for domain shift scenarios.
+#### 📄 **Bridging Domain Expertise and Generalization for Performance Estimation**
+[![](https://img.shields.io/badge/CVPR-2026-blue.svg)](https://openaccess.thecvf.com/) [![](https://img.shields.io/badge/Paper-PDF-red.svg)](https://openaccess.thecvf.com/content/CVPR2026/papers/Li_Bridging_Domain_Expertise_and_Generalization_for_Performance_Estimation_CVPR_2026_paper.pdf) [![](https://img.shields.io/badge/Code-PyTorch-orange.svg)](https://github.com/NuyoahNasuS/FRAP/)
+
+* **Authors:** **Shuxuan Li**, Zhilin Zhao, Quyu Kong, Wei-Shi Zheng
+* **Venue:** *IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), 2026*
+
+## 🌟 Overview
+
+Performance estimation under distribution shift aims to predict how a model behaves on an unlabeled test set whose distribution differs from the training data. 
+
+### 🚨 The Challenge
+Existing approaches rely solely on the outputs of the given model. However, the model's inherent biases are **amplified once the distribution shifts**, significantly weakening the correlation between the estimated and the true performance.
+
+### 💡 Our Solution: FRAP
+To break this limitation, we propose **Fused Reference Alignment Prediction (FRAP)**. 
+
+FRAP constructs a much more reliable surrogate of the ground-truth labels by leveraging the complementary strengths of two worlds:
+* **Domain-Specific Expertise:** Capitalizing on the intrinsic knowledge of the base model.
+* **Strong Cross-Domain Generalization:** Integrating the robust zero-shot capabilities of an external foundation model.
+
+---
+
+### 📌 Framework
+> **FRAP Pipeline Overview**
+
+<p align="center">
+  <img src=".assets/pipeline.jpg" alt="FRAP Framework" width="85%">
+</p>
 
 ## Project Structure
 
 ```
-RAAP_org/
+FRAP/
 ├── README.md                      # This file
 ├── requirements.txt               # Python dependencies
 ├── data_setup/                    # Dataset download scripts
